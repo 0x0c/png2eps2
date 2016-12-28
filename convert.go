@@ -24,10 +24,11 @@ func main() {
 				filename := s[0]
 				fmt.Println(filename)
 				wg.Add(1)
+				name := filename
 				go func() {
-					exec.Command("convert", filename+".png", filename+".jpeg").Run()
-					exec.Command("convert", filename+".jpeg", "eps2:"+filename+".eps").Run()
-					if err := os.Remove(filename+".jpeg"); err != nil {
+					exec.Command("convert", name+".png", name+".jpeg").Run()
+					exec.Command("convert", name+".jpeg", "eps2:"+name+".eps").Run()
+					if err := os.Remove(name+".jpeg"); err != nil {
 						fmt.Println(err)
 					}
 					wg.Done()
